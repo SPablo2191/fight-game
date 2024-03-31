@@ -7,14 +7,14 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-# load background image
+# load background image for menu
 bg_image = pygame.image.load(
     "assets/images/background/cherry_blossom_background.gif"
 ).convert_alpha()
 
 
-def draw_bg():
-    scaled_bg = pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
+def draw_bg(image):
+    scaled_bg = pygame.transform.scale(image, (SCREEN_WIDTH, SCREEN_HEIGHT))
     screen.blit(scaled_bg, (0, 0))
 
 
@@ -24,7 +24,7 @@ pygame.display.set_caption("Spring Brawl Festa: Fist Carnival DELUXE 2024")
 run = True
 while run:
     # draw background
-    draw_bg()
+    draw_bg(bg_image)
     # event handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
