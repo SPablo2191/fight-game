@@ -1,5 +1,7 @@
 import pygame
 
+
+
 pygame.init()
 
 # create game window
@@ -11,6 +13,8 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 bg_image = pygame.image.load(
     "assets/images/background/cherry_blossom_background.gif"
 ).convert_alpha()
+
+
 
 
 def draw_bg(image):
@@ -25,6 +29,7 @@ run = True
 while run:
     # draw background
     draw_bg(bg_image)
+
     # event handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
