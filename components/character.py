@@ -158,8 +158,8 @@ class Character(pygame.sprite.Sprite):
         self.rect.topleft = (self.rect.x + float(amount), self.rect.y)
         if 0 > self.rect.topleft[0]:
             self.rect.topleft = (0, self.rect.y)
-        if 800 < self.rect.topright[0]:
-            self.rect.topright = (800, self.rect.y)
+        if 1280 < self.rect.topright[0]:
+            self.rect.topright = (1280, self.rect.y)
 
     def jumping(self, amount):
         self.rect.topleft = (self.rect.x, self.rect.y-float(amount))

@@ -17,7 +17,13 @@ COLORS = {
     "red": (255, 0, 0),
     "blue": (0, 255, 0),
     "green": (0, 0, 255),
+    "black": (0,0,0)
 }
+
+# music parameter
+pygame.mixer.music.load("assets/audio/menu.mp3")
+pygame.mixer.music.play(-1)
+
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # add name
@@ -39,7 +45,7 @@ hpbar_player1 = HpBar(
         "assets/images/icons/hp_bar.png"), (30, 50), (300, 46), pygame.image.load("assets/images/icons/hp.png"))
 hpbar_player2 = HpBar(
     pygame.image.load(
-        "assets/images/icons/hp_bar.png"), (460, 50), (300, 46), pygame.image.load("assets/images/icons/hp.png"))
+        "assets/images/icons/hp_bar.png"), (960, 50), (300, 46), pygame.image.load("assets/images/icons/hp.png"))
 
 clock = pygame.time.Clock()
 
@@ -53,7 +59,7 @@ def res_hp():
 
     hpbar_player2_res = HpBar(
         pygame.image.load(
-            "assets/images/icons/hp_bar.png"), (460, 50), (300, 46), pygame.image.load("assets/images/icons/hp.png"))
+            "assets/images/icons/hp_bar.png"), (960, 50), (300, 46), pygame.image.load("assets/images/icons/hp.png"))
     hpbar_player1 = hpbar_player1_res
     hpbar_player2 = hpbar_player2_res
 
@@ -238,15 +244,18 @@ ani_ryu = [ryu_idle, ryu_move, ryu_jump,
 ani_ryu2 = [ken_idle, ken_move, ken_jump,
             ken_punch, ken_airpunch, ken_kick, ken_airkick, ken_hit]
 ryu = Character(ani_ryu, 20, 500)
-ken = Character(ani_ryu2, 640, 500)
+ken = Character(ani_ryu2, 1140, 500)
 player = ryu
+is_player_reversed = False
 player2 = ken
+is_player2_reversed = True # por defecto mira para el lado incorrecto
 players = [ryu, ken]
 chrc_group = pygame.sprite.Group(ryu)
 chrc_group.add(ken)
 
 
 def get_main_menu():
+    global is_player_reversed, is_player2_reversed
     while True:
         screen.fill("black")
         draw_bg(image=bg_image_menu)
@@ -285,6 +294,22 @@ def get_main_menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if play_button.checkForInput(menu_mouse_position):
                     play()
+                    pygame.mixer.music.load("assets/audio/menu.mp3")
+                    pygame.mixer.music.play(-1)
+                    player.hp = 1
+                    player2.hp = 1
+                    res_hp()
+                    # player2 is made reverse
+                    if is_player_reversed:
+                        for images in player.sprites:
+                            reverse_images(images)
+                        is_player_reversed = not is_player_reversed
+                    if is_player2_reversed:
+                        for images in player2.sprites:
+                            reverse_images(images)
+                        is_player2_reversed = not is_player2_reversed
+                    player.rect.topleft = (20, 500)
+                    player2.rect.topleft = (1140, 500)
                 if credits_button.checkForInput(menu_mouse_position):
                     get_credits()
                 if quit_button.checkForInput(menu_mouse_position):
@@ -319,11 +344,15 @@ def collisionDetection(self, other_player):
 
 
 def play():
+    global is_player_reversed,is_player2_reversed
+    pygame.mixer.music.load("assets/audio/fight.mp3")
+    pygame.mixer.music.play(-1)
     # player2 is made reverse
-    for images in player2.sprites:
-        reverse_images(images)
-    player2.reverseHitBox()
-
+    if is_player2_reversed:
+        for images in player2.sprites:
+            reverse_images(images)
+        player2.reverseHitBox()
+        is_player2_reversed = not is_player2_reversed
     # statements
     walk_right = False
     walk_left = False
@@ -729,8 +758,10 @@ def play():
             player2.reverseHitBox()
             for images in player.sprites:
                 reverse_images(images)
+            is_player_reversed = not is_player_reversed
             for images in player2.sprites:
                 reverse_images(images)
+            is_player2_reversed = not is_player2_reversed
 
         if player.rect.topleft[0] < player2.rect.topleft[0] and not flip_str:
             flip_str = True
@@ -739,8 +770,10 @@ def play():
             player2.reverseHitBox()
             for images in player.sprites:
                 reverse_images(images)
+            is_player_reversed = not is_player_reversed
             for images in player2.sprites:
                 reverse_images(images)
+            is_player2_reversed = not is_player2_reversed
 
         collisionDetection(player, player2)
         collisionDetection(player2, player)
@@ -763,8 +796,8 @@ def play():
         screen.blit(hpbar_player1.hpImage, hpbar_player1.hpImage_rect.topleft)
         screen.blit(hpbar_player2.image, hpbar_player2.rect.topleft)
         screen.blit(hpbar_player2.hpImage, hpbar_player2.hpImage_rect.topleft)
-        text_rec = tempfont.render(text, True, COLORS["red"], COLORS["green"])
-        screen.blit(text_rec, (370, 55))
+        text_rec = tempfont.render(text, True, COLORS["white"], COLORS["black"])
+        screen.blit(text_rec, (600, 55))
         if(player.hp < 0 or player2.hp < 0):
             break
         if counter < 0:
