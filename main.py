@@ -796,7 +796,7 @@ def play():
         screen.blit(hpbar_player1.hpImage, hpbar_player1.hpImage_rect.topleft)
         screen.blit(hpbar_player2.image, hpbar_player2.rect.topleft)
         screen.blit(hpbar_player2.hpImage, hpbar_player2.hpImage_rect.topleft)
-        text_rec = tempfont.render(text, True, COLORS["white"], COLORS["black"])
+        text_rec = tempfont.render(text, True, COLORS["white"])
         screen.blit(text_rec, (600, 55))
         if(player.hp < 0 or player2.hp < 0):
             break
