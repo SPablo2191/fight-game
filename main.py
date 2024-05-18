@@ -393,11 +393,11 @@ def play():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYDOWN and (user_input[pygame.K_d] or user_input[pygame.K_c] or user_input[pygame.K_UP] or user_input[pygame.K_DOWN] or user_input[pygame.K_RIGHT] or user_input[pygame.K_LEFT]):
+            if event.type == pygame.KEYDOWN and (user_input[pygame.K_z] or user_input[pygame.K_c] or user_input[pygame.K_UP] or user_input[pygame.K_DOWN] or user_input[pygame.K_RIGHT] or user_input[pygame.K_LEFT]):
                 player.animate()
             if event.type == pygame.KEYDOWN and (user_input[pygame.K_h] or user_input[pygame.K_n] or user_input[pygame.K_o] or user_input[pygame.K_k] or user_input[pygame.K_l] or user_input[pygame.K_j]):
                 player2.animate()
-            if event.type == pygame.KEYUP and not((user_input[pygame.K_d] and user_input[pygame.K_c] and user_input[pygame.K_UP] and user_input[pygame.K_DOWN] and user_input[pygame.K_RIGHT] and user_input[pygame.K_LEFT])):
+            if event.type == pygame.KEYUP and not((user_input[pygame.K_z] and user_input[pygame.K_c] and user_input[pygame.K_UP] and user_input[pygame.K_DOWN] and user_input[pygame.K_RIGHT] and user_input[pygame.K_LEFT])):
                 is_continues = False
             if event.type == pygame.KEYUP and not((user_input[pygame.K_h] and user_input[pygame.K_n] and user_input[pygame.K_o] and user_input[pygame.K_k] and user_input[pygame.K_l] and user_input[pygame.K_j])):
                 is_continues2 = False
@@ -425,7 +425,7 @@ def play():
                     walk_right = False
                     walk_left = False
                     is_continues = False
-                if user_input[pygame.K_d] or is_punching:
+                if user_input[pygame.K_z] or is_punching:
                     if not is_kicking:
                         ani_num = 3
                         speed = 0.1
@@ -451,7 +451,7 @@ def play():
                     walk_right = False
                     walk_left = False
                     is_continues = False
-                if user_input[pygame.K_d] or is_punching:
+                if user_input[pygame.K_z] or is_punching:
                     if not is_kicking:
                         ani_num = 3
                         speed = 0.1
@@ -466,7 +466,7 @@ def play():
                     walk_left = False
                     is_continues = False
 
-            if user_input[pygame.K_d] and not (walk_up):
+            if user_input[pygame.K_z] and not (walk_up):
 
                 if not is_kicking:
                     ani_num = 3
@@ -477,7 +477,7 @@ def play():
                     player.is_attacking = True
                     player.is_punching = True
 
-            if user_input[pygame.K_d] and walk_up:
+            if user_input[pygame.K_z] and walk_up:
                 ani_num = 4
                 speed = 0.05
                 is_punching = True
@@ -511,14 +511,14 @@ def play():
                 player.jumping(jump_coef)
                 jump_coef -= 1
 
-                if user_input[pygame.K_RIGHT] and user_input[pygame.K_UP] and user_input[pygame.K_d]:
+                if user_input[pygame.K_RIGHT] and user_input[pygame.K_UP] and user_input[pygame.K_z]:
                     ani_num = 4
                     speed = 0.05
                     is_punching = True
                     walk_right = True
                     player.is_attacking = True
                     player.is_kicking = True
-                if user_input[pygame.K_LEFT] and user_input[pygame.K_UP] and user_input[pygame.K_d]:
+                if user_input[pygame.K_LEFT] and user_input[pygame.K_UP] and user_input[pygame.K_z]:
                     ani_num = 4
                     speed = 0.05
                     is_punching = True
