@@ -809,6 +809,8 @@ def play():
 
 
 def get_credits():
+    pygame.mixer.music.load("assets/audio/birthday_song.mp3")
+    pygame.mixer.music.play(-1)
     while True:
         mouse_position = pygame.mouse.get_pos()
         screen.fill("black")
