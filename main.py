@@ -3,6 +3,7 @@ from components.scaleable_image import ScaleableImage
 from components.hp_bar import HpBar
 from components.character import Character
 import pygame, sys
+from time import sleep
 
 
 pygame.init()
@@ -393,11 +394,11 @@ def play():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYDOWN and (user_input[pygame.K_z] or user_input[pygame.K_c] or user_input[pygame.K_UP] or user_input[pygame.K_DOWN] or user_input[pygame.K_RIGHT] or user_input[pygame.K_LEFT]):
+            if event.type == pygame.KEYDOWN and (user_input[pygame.K_z] or user_input[pygame.K_c] or user_input[pygame.K_UP] or user_input[pygame.K_DOWN] or user_input[pygame.K_d] or user_input[pygame.K_a]):
                 player.animate()
             if event.type == pygame.KEYDOWN and (user_input[pygame.K_h] or user_input[pygame.K_n] or user_input[pygame.K_o] or user_input[pygame.K_k] or user_input[pygame.K_l] or user_input[pygame.K_j]):
                 player2.animate()
-            if event.type == pygame.KEYUP and not((user_input[pygame.K_z] and user_input[pygame.K_c] and user_input[pygame.K_UP] and user_input[pygame.K_DOWN] and user_input[pygame.K_RIGHT] and user_input[pygame.K_LEFT])):
+            if event.type == pygame.KEYUP and not((user_input[pygame.K_z] and user_input[pygame.K_c] and user_input[pygame.K_UP] and user_input[pygame.K_DOWN] and user_input[pygame.K_d] and user_input[pygame.K_a])):
                 is_continues = False
             if event.type == pygame.KEYUP and not((user_input[pygame.K_h] and user_input[pygame.K_n] and user_input[pygame.K_o] and user_input[pygame.K_k] and user_input[pygame.K_l] and user_input[pygame.K_j])):
                 is_continues2 = False
@@ -414,13 +415,13 @@ def play():
                     walk_left = False
                     walk_right = False
 
-            if user_input[pygame.K_RIGHT] and not (walk_up):
+            if user_input[pygame.K_d] and not (walk_up):
 
                 ani_num = 1
                 speed = 0.25
                 walk_right = True
                 is_continues = True
-                if user_input[pygame.K_LEFT]:
+                if user_input[pygame.K_a]:
                     ani_num = 0
                     walk_right = False
                     walk_left = False
@@ -440,13 +441,13 @@ def play():
                     walk_left = False
                     is_continues = False
 
-            if user_input[pygame.K_LEFT] and not (walk_up):
+            if user_input[pygame.K_a] and not (walk_up):
                 ani_num = 1
                 speed = 0.25
 
                 walk_left = True
                 is_continues = True
-                if user_input[pygame.K_RIGHT]:
+                if user_input[pygame.K_d]:
                     ani_num = 0
                     walk_right = False
                     walk_left = False
@@ -511,28 +512,28 @@ def play():
                 player.jumping(jump_coef)
                 jump_coef -= 1
 
-                if user_input[pygame.K_RIGHT] and user_input[pygame.K_UP] and user_input[pygame.K_z]:
+                if user_input[pygame.K_d] and user_input[pygame.K_UP] and user_input[pygame.K_z]:
                     ani_num = 4
                     speed = 0.05
                     is_punching = True
                     walk_right = True
                     player.is_attacking = True
                     player.is_kicking = True
-                if user_input[pygame.K_LEFT] and user_input[pygame.K_UP] and user_input[pygame.K_z]:
+                if user_input[pygame.K_a] and user_input[pygame.K_UP] and user_input[pygame.K_z]:
                     ani_num = 4
                     speed = 0.05
                     is_punching = True
                     walk_left = True
                     player.is_attacking = True
                     player.is_kicking = True
-                if user_input[pygame.K_RIGHT] and user_input[pygame.K_UP] and user_input[pygame.K_c]:
+                if user_input[pygame.K_d] and user_input[pygame.K_UP] and user_input[pygame.K_c]:
                     ani_num = 6
                     speed = 0.05
                     is_kicking = True
                     walk_right = True
                     player.is_attacking = True
                     player.is_kicking = True
-                if user_input[pygame.K_LEFT] and user_input[pygame.K_UP] and user_input[pygame.K_c]:
+                if user_input[pygame.K_a] and user_input[pygame.K_UP] and user_input[pygame.K_c]:
                     ani_num = 6
                     speed = 0.05
                     is_kicking = True
@@ -799,6 +800,7 @@ def play():
         text_rec = tempfont.render(text, True, COLORS["white"])
         screen.blit(text_rec, (600, 55))
         if(player.hp < 0 or player2.hp < 0):
+            sleep(2)
             break
         if counter < 0:
             break
