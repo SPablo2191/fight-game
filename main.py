@@ -845,6 +845,8 @@ def get_credits():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if btn_exit.checkForInput(mouse_position):
+                    pygame.mixer.music.load("assets/audio/menu.mp3")
+                    pygame.mixer.music.play(-1)
                     get_main_menu()
 
         scl_group.update()
